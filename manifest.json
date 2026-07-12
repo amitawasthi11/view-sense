@@ -4,7 +4,13 @@
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup/popup.html",
     "default_icon": "batman.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ]
 }
