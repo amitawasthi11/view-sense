@@ -1,11 +1,24 @@
-console.log("YT Track Extension Loaded 🚀");
-function getTitle() {
-  const title = document.querySelector(
-  "ytd-watch-metadata yt-formatted-string"
-)?.textContent.trim();
+// document.addEventListener("yt-navigate-finish", () => {
+//     const element = document.querySelector(
+//         "h1.style-scope.ytd-watch-metadata yt-formatted-string"
+//     );
 
-console.log(title);
-}
-console.log(getTitle());
-// console.log("Content script loaded!");
-// alert("Content script loaded!");
+//     console.log(element);
+//     console.log(element?.innerHTML);
+//     console.log(element?.textContent);
+// });
+document.addEventListener("yt-navigate-finish", () => {
+    const titleElement = document.querySelector(
+        "h1.style-scope.ytd-watch-metadata yt-formatted-string"
+    );
+
+    if (!titleElement) return;
+
+    const title = titleElement.textContent.trim();
+
+    console.log("Saving:", title);
+
+    chrome.storage.local.set({ title }, () => {
+        console.log("Saved!");
+    });
+});
